@@ -67,8 +67,11 @@ fun makeRecipe():ArrayList<Alimento>{
 }
 
 fun viewRecipe(receta: Receta){
+    val alimentos = receta.alimentos
+    for (alimento in alimentos){
+        println("ingrediente: ${alimento.name}")
+    }
 
-    println("receta: $receta")
 }
 
 fun solicitarcantidad(name: String): String? {
