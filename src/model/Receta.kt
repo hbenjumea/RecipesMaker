@@ -1,3 +1,3 @@
 package model
 
-class Receta(var alimentos: ArrayList<Alimento>)
+class Receta(var name: String, var alimentos: ArrayList<Alimento>)

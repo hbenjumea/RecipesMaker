@@ -1,3 +1,4 @@
 package model
 
-open class Ingrediente (cantidad: String)
+open class Ingrediente (var cantidad: String)
+

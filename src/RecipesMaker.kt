@@ -2,8 +2,9 @@ import model.Alimento
 import model.Receta
 
 fun main() {
-    val alimentos = arrayListOf<Alimento>()
-    val receta = Receta(alimentos)
+
+    val recetas = arrayListOf<Receta>()
+
     menuprincipal@do {
         val menu = """
             :: Bienvemido a Recipe Maker ::
@@ -15,12 +16,19 @@ fun main() {
             3. Salir
         """.trimIndent()
         println(menu)
-        val response:String? = readLine()
+        var response:String? = readLine()
         when(response){
             "1" -> {
+                println("Digite el nombre de la receta: ")
+                response = readLine()
+                val alimentos = arrayListOf<Alimento>()
+                val receta = response?.let { Receta(it, alimentos) }
                 alimentos.addAll(makeRecipe())
+                if (receta != null) {
+                    recetas.add(receta)
+                }
             }//receta = makeRecipe()
-            "2" -> viewRecipe(receta)
+            "2" -> viewRecipe(recetas)
             "3" -> break@menuprincipal
             else -> println("Solo 1, 2, 3")
         }
@@ -66,12 +74,14 @@ fun makeRecipe():ArrayList<Alimento>{
     return alimentos
 }
 
-fun viewRecipe(receta: Receta){
-    val alimentos = receta.alimentos
-    for (alimento in alimentos){
-        println("ingrediente: ${alimento.name}")
+fun viewRecipe(recetas: ArrayList<Receta>){
+    for (receta in recetas){
+        println("Receta: ${receta.name}")
+        val alimentos = receta.alimentos
+        for (alimento in alimentos){
+            println("Ingrediente: ${alimento.name} - Cantidad: ${alimento.cantidad}")
+        }
     }
-
 }
 
 fun solicitarcantidad(name: String): String? {
